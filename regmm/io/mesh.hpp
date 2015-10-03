@@ -1,91 +1,59 @@
 #ifndef _MESH_HPP_
 #define _MESH_HPP_
 
+#include <string>
+
 #include "basic_types.hpp"
 
 namespace regmm
 {
-     
+    template <typename Scalar, int Dim>
+    struct VtsType
+    {
+        typedef Arrays<VertexType, Scalar, Dim> Vertices;
+    };
+
+#define     VerticesArray     typename VtsType<Scalar, Dim>::Vertices
 }
 
 namespace regmm
 {
     template <typename Scalar, int Dim>
-    class Vertices
+    struct NmlsType
     {
-    private:
-        std::vector<VertexType> _data;
-
-    public:
-        VertexType& operator[](int index);
-        void push_back(VertexType& point);
+        typedef Arrays<NormalType, Scalar, Dim> Normals;
     };
 
-    template <typename Scalar, int Dim>
-    VertexType& Vertices<Scalar, Dim>::operator[](int index)
-    {
-        return _data[index];
-    }
-
-    template <typename Scalar, int Dim>
-    void Vertices<Scalar, Dim>::push_back(VertexType& point)
-    {
-        _data.push_back(point);
-    }
+#define     NormalsArray     typename NmlsType<Scalar, Dim>::Normals
 }
 
 namespace regmm
 {
     template <typename Scalar, int Dim>
-    class Normals
+    struct FacesType
     {
-    private:
-        std::vector<NormalType> _data;
-
-    public:
-        NormalType& operator[](int index);
-        void push_back(NormalType& point);
+        typedef Arrays<Face, Scalar, Dim> Faces;
     };
 
-    template <typename Scalar, int Dim>
-    NormalType& Normals<Scalar, Dim>::operator[](int index)
-    {
-        return _data[index];
-    }
-
-    template <typename Scalar, int Dim>
-    void Normals<Scalar, Dim>::push_back(NormalType& point)
-    {
-        _data.push_back(point);
-    }
+#define     FacesArray     typename FacesType<Scalar, Dim>::Faces
 }
+
 
 namespace regmm
 {
     template <typename Scalar, int Dim>
-    class Faces
+    class Mesh
     {
     private:
-        std::vector<Face> _data;
+        VerticesArray   vts_;
+        NormalsArray    nmls_;
+        FacesArray      fs_;
 
     public:
-        Face& operator[](int index);
-        void push_back(Face& face);
+        bool load(const std::string& filename);
+        void save(const std::string& filename);
     };
-
-    template <typename Scalar, int Dim>
-    Face& Faces<Scalar, Dim>::operator[](int index)
-    {
-        return _data[index];
-    }
-
-    template <typename Scalar, int Dim>
-    void Faces<Scalar, Dim>::push_back(Face& point)
-    {
-        _data.push_back(point);
-    }
 }
-
 
 
 #endif

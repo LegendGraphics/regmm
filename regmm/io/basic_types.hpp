@@ -6,7 +6,7 @@
 namespace regmm
 {
     template <typename Scalar, int Dim>
-    struct Array 
+    class Array 
     {
         Array()
         {
@@ -54,6 +54,26 @@ namespace regmm
     private:
         Scalar _d[];
     };
+
+    template<typename ArrayType, typename Scalar, int Dim>
+    class Arrays
+    {
+    private:
+        std::vector<ArrayType> _data;
+
+    public:
+        ArrayType& operator[](int index)
+        {
+            return _data[index];
+        }
+
+        void push_back(ArrayType& point)
+        {
+            _data.push_back(point);
+        }
+    };
+
+
 
     template <typename Scalar, int Dim>
     struct PtType

@@ -6,30 +6,12 @@
 namespace regmm
 {
     template <typename Scalar, int Dim>
-    class Points
+    struct PtsType
     {
-    private:
-        std::vector<PointType> _data;
-
-    public:
-        PointType& operator[](int index);
-        void push_back(PointType& point);
+        typedef Arrays<PointType, Scalar, Dim> Points;
     };
-}
 
-namespace regmm
-{
-    template <typename Scalar, int Dim>
-    PointType& Points<Scalar, Dim>::operator[](int index)
-    {
-        return _data[index];
-    }
-
-    template <typename Scalar, int Dim>
-    void Points<Scalar, Dim>::push_back(PointType& point)
-    {
-        _data.push_back(point);
-    }
+#define     PointsArray     typename PtsType<PointType, Scalar, Dim>::Points;
 }
 
 #endif
