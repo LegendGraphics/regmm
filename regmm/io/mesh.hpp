@@ -52,6 +52,10 @@ namespace regmm
     public:
         bool load(const std::string& filename);
         void save(const std::string& filename);
+
+        VerticesArray& getVertices() const { return vts_; }
+        NormalsArray& getNormals() const { return nmls_; }
+        FacesArray& getFaces() const { return fs_; }
     };
 }
 

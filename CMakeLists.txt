@@ -12,8 +12,8 @@ include_directories(${EIGEN3_INCLUDE_DIR})
     
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-set(regmm_io regmm/io)
-# set(src_core include/core)
+set(regmm_io 			regmm/io)
+set(regmm_transform 	regmm/transform)
 # set(src_fast include/fast)
 # set(src_disp include/disp)
 		 
@@ -22,7 +22,7 @@ set(regmm_io_files	${regmm_io}/points.hpp
 					${regmm_io}/basic_types.hpp
 					${regmm_io}/main.cpp)
 
-# set(srcs_core	${src_core}/registrator.hpp
+set(regmm_transform_files	${regmm_transform}/registrator.hpp)
 				# ${src_core}/cpd_base.hpp
 				# ${src_core}/cpd_rigid.hpp
 				# ${src_core}/cpd_affine.hpp
@@ -39,20 +39,20 @@ set(regmm_io_files	${regmm_io}/points.hpp
 set(Sources		"Source Files")
 
 set(srcfiles_io			${Sources}\\io)
-# set(srcfiles_core		${Sources}\\core)
+set(srcfiles_transform	${Sources}\\transform)
 # set(srcfiles_fast		${Sources}\\fast)
 # set(srcfiles_disp		${Sources}\\disp)
 # set(srcfiles_test		${Sources})
 
 source_group(${srcfiles_io} FILES ${regmm_io_files})
-# source_group(${srcfiles_core} FILES ${srcs_core})
+source_group(${srcfiles_transform} FILES ${regmm_transform_files})
 # source_group(${srcfiles_fast} FILES ${srcs_fast})
 # source_group(${srcfiles_disp} FILES ${srcs_disp})
 # source_group(${srcfiles_test} FILES ${srcs_test})
 
 
 # set(LINK_LIBRARY ${LINK_LIBRARY} ${OPENSCENEGRAPH_LIBRARIES} ${FIGTREE_LIBRARY})
-set(srcs		${regmm_io_files})
+set(srcs		${regmm_io_files} ${regmm_io_transform})
 
 # #set(incs        ${srcs_base} ${srcs_core})
 
