@@ -10,16 +10,17 @@ endif()
 
 include_directories(${EIGEN3_INCLUDE_DIR})
     
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-# set(src_base include/base)
+set(regmm_io regmm/io)
 # set(src_core include/core)
 # set(src_fast include/fast)
 # set(src_disp include/disp)
 		 
-# set(srcs_base	${src_base}/matrix.hpp
-				# ${src_base}/parameters.hpp
-				# ${src_base}/data.hpp)
+set(regmm_io_files	${regmm_io}/points.hpp
+					${regmm_io}/mesh.hpp
+					${regmm_io}/basic_types.hpp
+					${regmm_io}/main.cpp)
 
 # set(srcs_core	${src_core}/registrator.hpp
 				# ${src_core}/cpd_base.hpp
@@ -34,16 +35,16 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 				
 # set(srcs_test	src/test.cpp)  
 
-# #Organize the files
-# set(Sources		"Source Files")
+#Organize the files
+set(Sources		"Source Files")
 
-# set(srcfiles_base		${Sources}\\base)
+set(srcfiles_io			${Sources}\\io)
 # set(srcfiles_core		${Sources}\\core)
 # set(srcfiles_fast		${Sources}\\fast)
 # set(srcfiles_disp		${Sources}\\disp)
 # set(srcfiles_test		${Sources})
 
-# source_group(${srcfiles_base} FILES ${srcs_base})
+source_group(${srcfiles_io} FILES ${regmm_io_files})
 # source_group(${srcfiles_core} FILES ${srcs_core})
 # source_group(${srcfiles_fast} FILES ${srcs_fast})
 # source_group(${srcfiles_disp} FILES ${srcs_disp})
@@ -51,12 +52,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 
 # set(LINK_LIBRARY ${LINK_LIBRARY} ${OPENSCENEGRAPH_LIBRARIES} ${FIGTREE_LIBRARY})
-# set(srcs		${srcs_base} ${srcs_core} ${srcs_fast} ${srcs_disp} ${srcs_test})
-# #set(srcs		${srcs_test})
+set(srcs		${regmm_io_files})
+
 # #set(incs        ${srcs_base} ${srcs_core})
 
 # #include_directories(${incs})
-# add_executable(CPD ${srcs})
+add_executable(regmm ${srcs})
 # target_link_libraries(CPD ${LINK_LIBRARY})
 
 # set(CMAKE_INSTALL_PREFIX 	${PROJECT_SOURCE_DIR})

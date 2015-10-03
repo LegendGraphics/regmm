@@ -1,44 +1,34 @@
 #ifndef _POINTS_HPP_
 #define _POINTS_HPP_
 
+#include "basic_types.hpp"
+
 namespace regmm
 {
-    template <typename Scalar, int NumAtCompileTime>
+    template <typename Scalar, int Dim>
     class Points
     {
     private:
-        struct Point 
-        {
-            Scalar x;
-            Scalar y;
-            Scalar z;
-        };
-
-        Point _data[];
+        std::vector<PointType> _data;
 
     public:
-        Points();
-        virtual ~Points();
-
-        Point& operator[](int index);
+        PointType& operator[](int index);
+        void push_back(PointType& point);
     };
+}
 
-    template<typename Scalar, int NumAtCompileTime>
-    Points<Scalar, NumAtCompileTime>::Points()
-    {
-        _data = new int[NumAtCompileTime];
-    }
-
-    template<typename Scalar, int NumAtCompileTime>
-    Points<Scalar, NumAtCompileTime>::~Points()
-    {
-        delete[] _data;
-    }
-
-    template<typename Scalar, int NumAtCompileTime>
-    Point& Points<Scalar, NumAtCompileTime>::operator[](int index)
+namespace regmm
+{
+    template <typename Scalar, int Dim>
+    PointType& Points<Scalar, Dim>::operator[](int index)
     {
         return _data[index];
+    }
+
+    template <typename Scalar, int Dim>
+    void Points<Scalar, Dim>::push_back(PointType& point)
+    {
+        _data.push_back(point);
     }
 }
 
