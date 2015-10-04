@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <Eigen/Core>
+
 namespace regmm
 {
     template <typename Scalar, int Dim>
@@ -105,6 +107,21 @@ namespace regmm
 #define     PointType       typename PtType<Scalar, Dim>::Point
 #define     VertexType      typename VerType<Scalar, Dim>::Vertex
 #define     NormalType      typename NmlType<Scalar, Dim>::Normal
+
+
+    template <typename Scalar, int Dim>
+    struct MatrixType
+    {
+        typedef Eigen::Matrix<Scalar, Eigen::Dynamic, 1> Vector;
+
+        typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Dim, Eigen::RowMajor> MatrixD;
+
+        typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> Matrix;
+    };
+
+#define     TVector             typename MatrixType<Scalar, Dim>::Vector
+#define     TMatrixD            typename MatrixType<Scalar, Dim>::MatrixD
+#define     TMatrix             typename MatrixType<Scalar, Dim>::Matrix
 }
 
 #endif

@@ -11,7 +11,8 @@ namespace regmm
         typedef Arrays<PointType, Scalar, Dim> Points;
     };
 
-#define     PointsArray     typename PtsType<PointType, Scalar, Dim>::Points;
+#define     PointsArray     typename PtsType<PointType, Scalar, Dim>::Points
+#define     PointSet        PointsArray
 }
 
 #endif

@@ -20,7 +20,8 @@ set(regmm_transform 	regmm/transform)
 set(regmm_io_files	${regmm_io}/points.hpp
 					${regmm_io}/mesh.hpp
 					${regmm_io}/basic_types.hpp
-					${regmm_io}/main.cpp)
+					${regmm_io}/main.cpp
+                    ${regmm_io}/cast.hpp)
 
 set(regmm_transform_files	${regmm_transform}/registrator.hpp)
 				# ${src_core}/cpd_base.hpp
@@ -52,7 +53,7 @@ source_group(${srcfiles_transform} FILES ${regmm_transform_files})
 
 
 # set(LINK_LIBRARY ${LINK_LIBRARY} ${OPENSCENEGRAPH_LIBRARIES} ${FIGTREE_LIBRARY})
-set(srcs		${regmm_io_files} ${regmm_io_transform})
+set(srcs		${regmm_io_files} ${regmm_transform_files})
 
 # #set(incs        ${srcs_base} ${srcs_core})
 

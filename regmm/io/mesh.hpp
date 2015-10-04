@@ -57,6 +57,8 @@ namespace regmm
         NormalsArray& getNormals() const { return nmls_; }
         FacesArray& getFaces() const { return fs_; }
     };
+
+#define     MeshObject    Mesh<Scalar, Dim>
 }
 
 
