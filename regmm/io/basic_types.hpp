@@ -61,17 +61,17 @@ namespace regmm
     class Arrays
     {
     private:
-        std::vector<ArrayType> _data;
+        std::vector<ArrayType> data_;
 
     public:
         ArrayType& operator[](int index)
         {
-            return _data[index];
+            return data_[index];
         }
 
         void push_back(ArrayType& point)
         {
-            _data.push_back(point);
+            data_.push_back(point);
         }
     };
 

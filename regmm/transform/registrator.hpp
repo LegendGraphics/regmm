@@ -22,14 +22,19 @@ namespace regmm
         RegType         reg_type_;
         DataType        src_type_;
 
+        // original data
         PointSet*       ps_src_;
         MeshObject*     mo_src_;
 
         PointSet*       ps_tgt_;
         MeshObject*     mo_tgt_;
 
-        TMatrixD*       mat_src_;
-        TMatrixD*       mat_tgt_;
+        // matrix data
+        TMatrixD        model_;
+        TMatrixD        data_;
+
+        int             M_;
+        int             N_;
 
     public:
         Registrator();
@@ -44,9 +49,11 @@ namespace regmm
         void setSource(MeshObject& source);
         void setTarget(MeshObject& target);
 
+        virtual void compute() = 0;
+
     protected:
-        void normalize();
-        void denormalize();
+        void fillMatrixSource();
+        void rewriteOriginalSource();
     };
 }
 
@@ -113,13 +120,13 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
-    void Registrator<Scalar, Dim>::normalize()
+    void Registrator<Scalar, Dim>::fillMatrixSource()
     {
 
     }
 
     template <typename Scalar, int Dim>
-    void Registrator<Scalar, Dim>::denormalize()
+    void Registrator<Scalar, Dim>::rewriteOriginalSource()
     {
 
     }
