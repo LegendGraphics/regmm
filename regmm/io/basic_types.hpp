@@ -70,7 +70,10 @@ namespace regmm
 
         void normalize()
         {
-
+            Scalar s = norm();
+            x() = x() / s;
+            y() = y() / s;
+            z() = y() / s;
         }
 
         Scalar norm()
@@ -98,6 +101,11 @@ namespace regmm
         void push_back(ArrayType& point)
         {
             data_.push_back(point);
+        }
+
+        int size() const
+        {
+            return data_.size();
         }
     };
 

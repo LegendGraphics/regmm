@@ -128,12 +128,23 @@ namespace regmm
     {
         if (src_type_ == POINT_CLOUD)
         {
+            for (PointType& pt : ps_src_)
+            {
+                model_ << pt.x(), pt.y(), pt.z();
+            }
 
+            M_ = ps_src_->size();
         }
 
         else 
         {
+            VerticesArray& vts = mo_src_->getVertices();
+            for (VertexType& vt : vts)
+            {
+                model_ << vt.x(), vt.y(), vt.z();
+            }
 
+            N_ = mo_src_->size();
         }
     }
 
@@ -142,12 +153,25 @@ namespace regmm
     {
         if (src_type_ == POINT_CLOUD)
         {
-
+            for (size_t i = 0, i_end = ps_src_->size(); i < i_end; ++ i)
+            {
+                PointType& pt = ps_src_[i];
+                pt.x() = model_(i, 0);
+                pt.y() = model_(i, 1);
+                pt.z() = model_(i, 2);
+            }
         }
 
         else 
         {
-
+            VerticesArray& vts = mo_src_->getVertices();
+            for (size_t i = 0, i_end = mo_src_->size(); i < i_end; ++ i)
+            {
+                VertexType& vt = vts[i];
+                vt.x() = model_(i, 0);
+                vt.y() = model_(i, 1);
+                vt.z() = model_(i, 2);
+            }
         }
     }
 }

@@ -56,6 +56,8 @@ namespace regmm
         VerticesArray& getVertices() const { return vts_; }
         NormalsArray& getNormals() const { return nmls_; }
         FacesArray& getFaces() const { return fs_; }
+
+        int size() const { return vts_.size(); }
     };
 
 #define     MeshObject    Mesh<Scalar, Dim>
