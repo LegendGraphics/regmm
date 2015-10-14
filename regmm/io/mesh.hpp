@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "basic_types.hpp"
+#include "regmm/io/basic_types.hpp"
 
 namespace regmm
 {

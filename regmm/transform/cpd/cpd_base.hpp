@@ -24,8 +24,8 @@
 #ifndef _CPD_BASE_HPP_
 #define _CPD_BASE_HPP_
 
-#include "cpd/parameters.hpp"
-#include "registrator.hpp"
+#include "regmm/transform/cpd/parameters.hpp"
+#include "regmm/transform/registrator.hpp"
 
 namespace regmm
 {

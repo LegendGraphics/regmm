@@ -1,7 +1,7 @@
 #ifndef _POINTS_HPP_
 #define _POINTS_HPP_
 
-#include "basic_types.hpp"
+#include "regmm/io/basic_types.hpp"
 
 namespace regmm
 {

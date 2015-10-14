@@ -1,6 +1,10 @@
 #ifndef _REGISTRATOR_HPP_
 #define _REGISTRATOR_HPP_
 
+
+#include "regmm/io/points.hpp"
+#include "regmm/io/mesh.hpp"
+
 namespace regmm
 {
     enum RegType
@@ -122,13 +126,29 @@ namespace regmm
     template <typename Scalar, int Dim>
     void Registrator<Scalar, Dim>::fillMatrixSource()
     {
+        if (src_type_ == POINT_CLOUD)
+        {
 
+        }
+
+        else 
+        {
+
+        }
     }
 
     template <typename Scalar, int Dim>
     void Registrator<Scalar, Dim>::rewriteOriginalSource()
     {
+        if (src_type_ == POINT_CLOUD)
+        {
 
+        }
+
+        else 
+        {
+
+        }
     }
 }
 

@@ -31,8 +31,8 @@
 
 #include <Eigen/SVD>
 
-#include "cpd/cpd_base.hpp"
-#include "cpd/parameters.hpp"
+#include "regmm/transform/cpd/cpd_base.hpp"
+#include "regmm/transform/cpd/parameters.hpp"
 //#include "fast/fgt_wrapper.hpp"
 //#include "fast/low_rank.hpp"
 //#include "disp/render_thread.hpp"

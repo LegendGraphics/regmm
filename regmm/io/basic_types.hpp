@@ -39,18 +39,44 @@ namespace regmm
             delete[] _d;
         }
 
-        Scalar& x(){ return _d[0]; }
-        Scalar& y(){ return _d[1]; }
-        Scalar& z(){ assert(Dim == 3 ? true : ("z doesn't exists because dimension is only 2!" && false)); return _d[2]; }
+        inline Scalar& x(){ return _d[0]; }
+        inline Scalar& y(){ return _d[1]; }
+        inline Scalar& z(){ assert(Dim == 3 ? true : ("z doesn't exists because dimension is only 2!" && false)); return _d[2]; }
+
+        Array operator+(const Array& ary)
+        {
+            if (Dim == 2) return Array(x()+ary.x(), y()+ary.y());
+            else return Array(x()+ary.x(), y()+ary.y(), z()+ary.z());
+        }
+
+        Array operator-(const Array& ary)
+        {
+            if (Dim == 2) return Array(x()-ary.x(), y()-ary.y());
+            else return Array(x()-ary.x(), y()-ary.y(), z()-ary.z());
+        }
+
+        Array operator*(Scalar s)
+        {
+            if (Dim == 2) return Array(x()*s, y()*s);
+            else return Array(x()*s, y()*s, z()*s);
+        }
+
+        Array operator/(Scalar s)
+        {
+            if (Dim == 2) return Array(x()/s, y()/s);
+            else return Array(x()/s, y()/s, z()/s);
+        }
+
 
         void normalize()
         {
 
         }
 
-        void length()
+        Scalar norm()
         {
-
+            if (Dim == 2) return std::sqrt(x()*x()+y()*y());
+            else return std::sqrt(x()*x()+y()*y()+z()*z());
         }
 
     private:
