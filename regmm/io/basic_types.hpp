@@ -131,6 +131,13 @@ namespace regmm
 
     typedef struct  
     {
+        Face(int v0, int v1, int v2)
+        {
+            _idx[0] = v0;
+            _idx[1] = v1;
+            _idx[2] = v2;
+        }
+
         int _idx[3];
         int& operator[](int idx)
         {
