@@ -30,7 +30,9 @@ set(regmm_transform_files	${regmm_transform}/registrator.hpp)
 set(regmm_transform_cpd_files	${regmm_transform_cpd}/cpd_base.hpp
 								${regmm_transform_cpd}/cpd_rigid.hpp
 								${regmm_transform_cpd}/cpd_nonrigid.hpp
-								${regmm_transform_cpd}/parameters.hpp)
+								${regmm_transform_cpd}/parameters.hpp
+								${regmm_transform_cpd}/fgt_wrapper.hpp
+								${regmm_transform_cpd}/low_rank.hpp)
 				# ${src_core}/cpd_base.hpp
 				# ${src_core}/cpd_rigid.hpp
 				# ${src_core}/cpd_affine.hpp

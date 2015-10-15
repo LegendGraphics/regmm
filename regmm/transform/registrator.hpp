@@ -99,6 +99,8 @@ namespace regmm
         assert(src_type_ == MESH ? true : ("Source need to be MESH!" && false));
 
         ps_src_ = &source;
+
+        fillMatrixSource();
     }
 
     template <typename Scalar, int Dim>
@@ -113,6 +115,8 @@ namespace regmm
         assert(src_type_ == POINT_CLOUD ? true : ("Source need to be POINT CLOUD!" && false));
 
         mo_src_ = &source;
+
+        fillMatrixSource();
     }
 
     template <typename Scalar, int Dim>
@@ -128,22 +132,13 @@ namespace regmm
     {
         if (src_type_ == POINT_CLOUD)
         {
-            for (PointType& pt : ps_src_)
-            {
-                model_ << pt.x(), pt.y(), pt.z();
-            }
-
+            PointSet_To_TMatrixD(*ps_src_, model_);
             M_ = ps_src_->size();
         }
 
         else 
         {
-            VerticesArray& vts = mo_src_->getVertices();
-            for (VertexType& vt : vts)
-            {
-                model_ << vt.x(), vt.y(), vt.z();
-            }
-
+            MeshObject_To_TMatrixD(*mo_src_, model_);
             N_ = mo_src_->size();
         }
     }
@@ -152,27 +147,9 @@ namespace regmm
     void Registrator<Scalar, Dim>::rewriteOriginalSource()
     {
         if (src_type_ == POINT_CLOUD)
-        {
-            for (size_t i = 0, i_end = ps_src_->size(); i < i_end; ++ i)
-            {
-                PointType& pt = ps_src_[i];
-                pt.x() = model_(i, 0);
-                pt.y() = model_(i, 1);
-                pt.z() = model_(i, 2);
-            }
-        }
-
+            TMatrixD_To_PointSet(model_, *ps_src_);
         else 
-        {
-            VerticesArray& vts = mo_src_->getVertices();
-            for (size_t i = 0, i_end = mo_src_->size(); i < i_end; ++ i)
-            {
-                VertexType& vt = vts[i];
-                vt.x() = model_(i, 0);
-                vt.y() = model_(i, 1);
-                vt.z() = model_(i, 2);
-            }
-        }
+            TMatrixD_To_MeshObject(model_, *mo_src_);
     }
 }
 

@@ -50,8 +50,8 @@ namespace regmm
         FacesArray      fs_;
 
     public:
-        bool load(const std::string& filename);
-        void save(const std::string& filename);
+       /* bool load(const std::string& filename);
+        void save(const std::string& filename);*/
 
         VerticesArray& getVertices() const { return vts_; }
         NormalsArray& getNormals() const { return nmls_; }
@@ -61,6 +61,21 @@ namespace regmm
     };
 
 #define     MeshObject    Mesh<Scalar, Dim>
+}
+
+namespace regmm
+{
+    template <typename Scalar, int Dim>
+    void loadMeshObject(const std::string& filename, MeshObject& mesh)
+    {
+
+    }
+
+    template <typename Scalar, int Dim>
+    void saveMeshObject(const std::string& filename)
+    {
+
+    }
 }
 
 

@@ -73,7 +73,7 @@ namespace regmm
             Scalar s = norm();
             x() = x() / s;
             y() = y() / s;
-            z() = y() / s;
+            if (Dim == 3) z() = z() / s;
         }
 
         Scalar norm()

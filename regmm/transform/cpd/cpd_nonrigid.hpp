@@ -33,8 +33,8 @@
 
 #include "regmm/transform/cpd/cpd_base.hpp"
 #include "regmm/transform/cpd/parameters.hpp"
-//#include "fast/fgt_wrapper.hpp"
-//#include "fast/low_rank.hpp"
+#include "regmm/transform/cpd/fgt_wrapper.hpp"
+#include "regmm/transform/cpd/low_rank.hpp"
 //#include "disp/render_thread.hpp"
 
 namespace regmm
