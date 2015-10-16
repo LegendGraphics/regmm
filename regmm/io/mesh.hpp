@@ -65,7 +65,7 @@ namespace regmm
 
 namespace regmm
 {
-    template <typename Scalar, int Dim>
+    /*template <typename Scalar, int Dim>
     void loadMeshObject(const std::string& filename, MeshObject& mo)
     {
         std::vector<tinyobj::shape_t> shapes;
@@ -130,7 +130,7 @@ namespace regmm
 
         bool ret = WriteObj(filename, out_shape, out_material, false);
         assert(ret);
-    }
+    }*/
 }
 
 

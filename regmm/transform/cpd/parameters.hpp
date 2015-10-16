@@ -21,6 +21,8 @@
  * 
  */
 
+#include "regmm/io/basic_types.hpp"
+
 #ifndef _PARAMETERS_HPP_
 #define _PARAMETERS_HPP_
 

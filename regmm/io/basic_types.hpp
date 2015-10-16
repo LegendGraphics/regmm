@@ -129,7 +129,7 @@ namespace regmm
         typedef Array<Scalar, Dim> Normal;
     };
 
-    typedef struct  
+    struct Face
     {
         Face(int v0, int v1, int v2)
         {
@@ -143,7 +143,7 @@ namespace regmm
         {
             return _idx[idx];
         }
-    }Face;
+    };
 
 #define     PointType       typename PtType<Scalar, Dim>::Point
 #define     VertexType      typename VerType<Scalar, Dim>::Vertex
