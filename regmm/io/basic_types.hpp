@@ -10,6 +10,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     class Array 
     {
+    public:
         Array()
         {
             assert(Dim == 2 || Dim == 3);
@@ -36,7 +37,7 @@ namespace regmm
 
         ~Array()
         {
-            delete[] _d;
+            delete _d;
         }
 
         inline Scalar& x(){ return _d[0]; }
@@ -83,7 +84,7 @@ namespace regmm
         }
 
     private:
-        Scalar _d[];
+        Scalar* _d;
     };
 
     template<typename ArrayType, typename Scalar, int Dim>
