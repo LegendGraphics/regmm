@@ -47,7 +47,7 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
-    void savePointSet(const std::string& filename, const PointSet& ps)
+    void savePointSet(const std::string& filename, PointSet& ps)
     {
         std::vector<tinyobj::shape_t> out_shape(1);
         std::vector<tinyobj::material_t> out_material;

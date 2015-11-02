@@ -103,7 +103,7 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
-    void saveMeshObject(const std::string& filename, const MeshObject& mo)
+    void saveMeshObject(const std::string& filename, MeshObject& mo)
     {
         std::vector<tinyobj::shape_t> out_shape(1);
         std::vector<tinyobj::material_t> out_material;
