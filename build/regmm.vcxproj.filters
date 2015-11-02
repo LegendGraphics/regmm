@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\regmm\io\main.cpp">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\regmm\3rdparty\tinyobj\tiny_obj_loader.cc">
+      <Filter>Source Files\3rdparty\tinyobj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\regmm\3rdparty\tinyobj\obj_writer.cc">
+      <Filter>Source Files\3rdparty\tinyobj</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\regmm\io\points.hpp">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\io\mesh.hpp">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\io\basic_types.hpp">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\io\cast.hpp">
+      <Filter>Source Files\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\transform\registrator.hpp">
+      <Filter>Source Files\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\transform\cpd\cpd_base.hpp">
+      <Filter>Source Files\transform\cpd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\transform\cpd\cpd_rigid.hpp">
+      <Filter>Source Files\transform\cpd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\transform\cpd\cpd_nonrigid.hpp">
+      <Filter>Source Files\transform\cpd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\transform\cpd\parameters.hpp">
+      <Filter>Source Files\transform\cpd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\transform\cpd\fgt_wrapper.hpp">
+      <Filter>Source Files\transform\cpd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\transform\cpd\low_rank.hpp">
+      <Filter>Source Files\transform\cpd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\3rdparty\tinyobj\tiny_obj_loader.h">
+      <Filter>Source Files\3rdparty\tinyobj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\regmm\3rdparty\tinyobj\obj_writer.h">
+      <Filter>Source Files\3rdparty\tinyobj</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files\transform\cpd">
+      <UniqueIdentifier>{067D511E-729F-4B1D-91B1-9C5FCC607AEE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{8B53805D-1D44-4E2B-ADC2-B52C0C1C421C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\io">
+      <UniqueIdentifier>{F721C8FD-C39F-4D73-98C9-A4E4A78E8570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\transform">
+      <UniqueIdentifier>{F3F32266-6492-4606-BC5E-20483213B611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3rdparty">
+      <UniqueIdentifier>{9DE43936-9D49-4162-819A-8F517E8A158E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3rdparty\tinyobj">
+      <UniqueIdentifier>{9F3A6825-3675-406C-864A-139510318304}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

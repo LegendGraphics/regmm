@@ -40,9 +40,23 @@ namespace regmm
             delete _d;
         }
 
+        Array(const Array& ary)
+        {
+            _d = new Scalar[Dim];
+            memcpy(_d, ary.data(), sizeof(Scalar)*Dim);
+        }
+
+        void operator=(const Array& ary)
+        {
+            _d = new Scalar[Dim];
+            memcpy(_d, ary.data(), sizeof(Scalar)*Dim);
+        }
+
         inline Scalar& x(){ return _d[0]; }
         inline Scalar& y(){ return _d[1]; }
         inline Scalar& z(){ assert(Dim == 3 ? true : ("z doesn't exists because dimension is only 2!" && false)); return _d[2]; }
+
+        inline const Scalar* data() const { return _d; }
 
         Array operator+(const Array& ary)
         {

@@ -16,6 +16,9 @@ set(regmm_io 				regmm/io)
 set(regmm_transform 		regmm/transform)
 set(regmm_transform_cpd		regmm/transform/cpd)
 set(regmm_transform_arap	regmm/transform/arap)
+set(regmm_3rdparty			regmm/3rdparty)
+set(regmm_3rdparty_figtree	regmm/3rdparty/figtree)
+set(regmm_3rdparty_tinyobj	regmm/3rdparty/tinyobj)
 
 # set(src_fast include/fast)
 # set(src_disp include/disp)
@@ -37,6 +40,11 @@ set(regmm_transform_cpd_files	${regmm_transform_cpd}/cpd_base.hpp
 				# ${src_core}/cpd_rigid.hpp
 				# ${src_core}/cpd_affine.hpp
 				# ${src_core}/cpd_nonrigid.hpp)
+				
+set(regmm_3rdparty_tinyobj_files	${regmm_3rdparty_tinyobj}/tiny_obj_loader.h
+									${regmm_3rdparty_tinyobj}/tiny_obj_loader.cc
+									${regmm_3rdparty_tinyobj}/obj_writer.h
+									${regmm_3rdparty_tinyobj}/obj_writer.cc)
 
 # set(srcs_fast   ${src_fast}/low_rank.hpp
                 # ${src_fast}/fgt_wrapper.hpp)
@@ -51,6 +59,7 @@ set(Sources		"Source Files")
 set(srcfiles_io				${Sources}\\io)
 set(srcfiles_transform		${Sources}\\transform)
 set(srcfiles_transform_cpd	${Sources}\\transform\\cpd)
+set(srcfiles_3rdparty_tinyobj	${Sources}\\3rdparty\\tinyobj)
 # set(srcfiles_fast		${Sources}\\fast)
 # set(srcfiles_disp		${Sources}\\disp)
 # set(srcfiles_test		${Sources})
@@ -58,13 +67,14 @@ set(srcfiles_transform_cpd	${Sources}\\transform\\cpd)
 source_group(${srcfiles_io} FILES ${regmm_io_files})
 source_group(${srcfiles_transform} FILES ${regmm_transform_files})
 source_group(${srcfiles_transform_cpd} FILES ${regmm_transform_cpd_files})
+source_group(${srcfiles_3rdparty_tinyobj} FILES ${regmm_3rdparty_tinyobj_files})
 # source_group(${srcfiles_fast} FILES ${srcs_fast})
 # source_group(${srcfiles_disp} FILES ${srcs_disp})
 # source_group(${srcfiles_test} FILES ${srcs_test})
 
 
 # set(LINK_LIBRARY ${LINK_LIBRARY} ${OPENSCENEGRAPH_LIBRARIES} ${FIGTREE_LIBRARY})
-set(srcs		${regmm_io_files} ${regmm_transform_files} ${regmm_transform_cpd_files})
+set(srcs		${regmm_io_files} ${regmm_transform_files} ${regmm_transform_cpd_files} ${regmm_3rdparty_tinyobj_files})
 
 # #set(incs        ${srcs_base} ${srcs_core})
 

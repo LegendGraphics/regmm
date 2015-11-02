@@ -53,19 +53,22 @@ namespace regmm
        /* bool load(const std::string& filename);
         void save(const std::string& filename);*/
 
-        VerticesArray& getVertices() const { return vts_; }
-        NormalsArray& getNormals() const { return nmls_; }
-        FacesArray& getFaces() const { return fs_; }
+        VerticesArray& getVertices() { return vts_; }
+        NormalsArray& getNormals() { return nmls_; }
+        FacesArray& getFaces() { return fs_; }
 
         int size() const { return vts_.size(); }
     };
 
 #define     MeshObject    Mesh<Scalar, Dim>
+
+#define     MeshObjectInstance(S, D)  regmm::Mesh<S, D>
+
 }
 
 namespace regmm
 {
-    /*template <typename Scalar, int Dim>
+    template <typename Scalar, int Dim>
     void loadMeshObject(const std::string& filename, MeshObject& mo)
     {
         std::vector<tinyobj::shape_t> shapes;
@@ -85,14 +88,18 @@ namespace regmm
         assert((mesh.normals.size() % 3) == 0);
         assert((mesh.indices.size() % 3) == 0);
 
+        VerticesArray& vts = mo.getVertices();
+        NormalsArray& nls = mo.getNormals();
+        FacesArray& fs = mo.getFaces();
+
         for (size_t v = 0; v < mesh.positions.size() / 3; v++) 
-            mo.push_back(VertexType(mesh.positions[3*v+0], mesh.positions[3*v+1], mesh.positions[3*v+2]));
+            vts.push_back(VertexType(mesh.positions[3*v+0], mesh.positions[3*v+1], mesh.positions[3*v+2]));
 
         for (size_t n = 0; n < mesh.normals.size() / 3; n++) 
-            mo.push_back(NormalType(mesh.normals[3*n+0], mesh.normals[3*n+1], mesh.normals[3*n+2]));
+            nls.push_back(NormalType(mesh.normals[3*n+0], mesh.normals[3*n+1], mesh.normals[3*n+2]));
 
         for (size_t f = 0; f < mesh.indices.size() / 3; f++) 
-            mo.push_back(Face(mesh.indices[3*f+0], mesh.indices[3*f+1], mesh.indices[3*f+2]));
+            fs.push_back(Face(mesh.indices[3*f+0], mesh.indices[3*f+1], mesh.indices[3*f+2]));
     }
 
     template <typename Scalar, int Dim>
@@ -130,7 +137,7 @@ namespace regmm
 
         bool ret = WriteObj(filename, out_shape, out_material, false);
         assert(ret);
-    }*/
+    }
 }
 
 
