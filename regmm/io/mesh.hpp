@@ -57,6 +57,10 @@ namespace regmm
         NormalsArray& getNormals() { return nmls_; }
         FacesArray& getFaces() { return fs_; }
 
+       /* VerticesArray& getVertices() const { return vts_; }
+        NormalsArray& getNormals() const { return nmls_; }
+        FacesArray& getFaces() const { return fs_; }*/
+
         int size() const { return vts_.size(); }
     };
 
@@ -103,7 +107,7 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
-    void saveMeshObject(const std::string& filename, MeshObject& mo)
+    void saveMeshObject(const std::string& filename,const MeshObject& mo)
     {
         std::vector<tinyobj::shape_t> out_shape(1);
 

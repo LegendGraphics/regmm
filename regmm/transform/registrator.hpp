@@ -4,6 +4,7 @@
 
 #include "regmm/io/points.hpp"
 #include "regmm/io/mesh.hpp"
+#include "regmm/io/cast.hpp"
 
 namespace regmm
 {
@@ -22,7 +23,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     class Registrator
     {
-    private:
+    protected:
         RegType         reg_type_;
         DataType        src_type_;
 
@@ -132,13 +133,13 @@ namespace regmm
     {
         if (src_type_ == POINT_CLOUD)
         {
-            PointSet_To_TMatrixD(*ps_src_, model_);
+            PointSet_To_TMatrixD<Scalar, Dim>(*ps_src_, model_);
             M_ = ps_src_->size();
         }
 
         else 
         {
-            MeshObject_To_TMatrixD(*mo_src_, model_);
+            MeshObject_To_TMatrixD<Scalar, Dim>(*mo_src_, model_);
             N_ = mo_src_->size();
         }
     }
@@ -147,9 +148,9 @@ namespace regmm
     void Registrator<Scalar, Dim>::rewriteOriginalSource()
     {
         if (src_type_ == POINT_CLOUD)
-            TMatrixD_To_PointSet(model_, *ps_src_);
+            TMatrixD_To_PointSet<Scalar, Dim>(model_, *ps_src_);
         else 
-            TMatrixD_To_MeshObject(model_, *mo_src_);
+            TMatrixD_To_MeshObject<Scalar, Dim>(model_, *mo_src_);
     }
 }
 

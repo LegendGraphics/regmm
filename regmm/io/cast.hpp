@@ -8,8 +8,9 @@ namespace regmm
     template <typename Scalar, int Dim>
     void PointSet_To_TMatrixD(const PointSet& ps, TMatrixD& mat)
     {
-        for (PointType& pt : ps)
+        for (size_t i = 0, i_end = ps.size(); i < i_end; ++ i)
         {
+            PointType& pt = const_cast<PointSet&>(ps)[i];
             mat << pt.x(), pt.y(), pt.z();
         }
     }
@@ -17,9 +18,10 @@ namespace regmm
     template <typename Scalar, int Dim>
     void MeshObject_To_TMatrixD(const MeshObject& mo, TMatrixD& mat)
     {
-        VerticesArray& vts = mo.getVertices();
-        for (VertexType& vt : vts)
+        VerticesArray& vts = const_cast<MeshObject&>(mo).getVertices();
+        for (size_t i = 0, i_end = vts.size(); i < i_end; ++ i)
         {
+            VertexType& vt = vts[i];
             mat << vt.x(), vt.y(), vt.z();
         }
     }
