@@ -15,6 +15,7 @@ int main()
     std::string file = "d:/petal.obj";
     std::string newfile = "d:/npetal.obj";
     regmm::loadPointSet<SCALAR, DIM>(file, *source);
+    regmm::loadPointSet<SCALAR, DIM>(file, *target);
     //regmm::loadMeshObject<SCALAR, DIM>(file, *test);
 
     //regmm::savePointSet<SCALAR, DIM>(newfile, *source);

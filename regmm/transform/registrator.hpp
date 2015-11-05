@@ -58,6 +58,7 @@ namespace regmm
 
     protected:
         void fillMatrixSource();
+        void fillMatrixTarget();
         void rewriteOriginalSource();
     };
 }
@@ -97,7 +98,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     void Registrator<Scalar, Dim>::setSource(PointSet& source)
     {
-        assert(src_type_ == MESH ? true : ("Source need to be MESH!" && false));
+        assert(src_type_ == POINT_CLOUD ? true : ("Source need to be POINT CLOUD!" && false));
 
         ps_src_ = &source;
 
@@ -108,12 +109,14 @@ namespace regmm
     void Registrator<Scalar, Dim>::setTarget(PointSet& target)
     {
         ps_tgt_ = &target;
+
+        fillMatrixTarget();
     }
 
     template <typename Scalar, int Dim>
     void Registrator<Scalar, Dim>::setSource(MeshObject& source)
     {
-        assert(src_type_ == POINT_CLOUD ? true : ("Source need to be POINT CLOUD!" && false));
+        assert(src_type_ == MESH ? true : ("Source need to be MESH!" && false));
 
         mo_src_ = &source;
 
@@ -126,6 +129,8 @@ namespace regmm
         mo_tgt_ = &target;
 
         ps_tgt_ = &mo_tgt_->getVertices();
+
+        fillMatrixTarget();
     }
 
     template <typename Scalar, int Dim>
@@ -140,8 +145,15 @@ namespace regmm
         else 
         {
             MeshObject_To_TMatrixD<Scalar, Dim>(*mo_src_, model_);
-            N_ = mo_src_->size();
+            M_ = mo_src_->size();
         }
+    }
+
+    template <typename Scalar, int Dim>
+    void Registrator<Scalar, Dim>::fillMatrixTarget()
+    {
+        PointSet_To_TMatrixD<Scalar, Dim>(*ps_tgt_, data_);
+        N_ = ps_tgt_->size();
     }
 
     template <typename Scalar, int Dim>

@@ -31,6 +31,7 @@
 #include <vector>
 
 #include <Eigen/SVD>
+#include <Eigen/LU>
 
 #include "regmm/transform/cpd/cpd_base.hpp"
 #include "regmm/transform/cpd/parameters.hpp"
@@ -112,6 +113,7 @@ namespace regmm
         correspondences();
         this->updateModel();
         this->denormalize();
+        this->rewriteOriginalSource();
         /*RenderThread<Scalar, Dim>::instance()->cancel();*/
     }
 

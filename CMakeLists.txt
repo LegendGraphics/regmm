@@ -8,6 +8,9 @@ set( EIGEN3_INCLUDE_DIR "$ENV{EIGEN3_INCLUDE_DIR}" )
 #    message( FATAL_ERROR "Please point the environment variable EIGEN3_INCLUDE_DIR to the include directory of your Eigen3 installation." )
 #endif()
 
+find_package(3rdParty)
+include_directories(${FIGTREE_INCLUDE_DIR})   
+
 include_directories(${EIGEN3_INCLUDE_DIR})
     
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -46,6 +49,8 @@ set(regmm_3rdparty_tinyobj_files	${regmm_3rdparty_tinyobj}/tiny_obj_loader.h
 									${regmm_3rdparty_tinyobj}/obj_writer.h
 									${regmm_3rdparty_tinyobj}/obj_writer.cc)
 
+set(regmm_3rdparty_figtree_files	${regmm_3rdparty_figtree}/figtree.h)
+
 # set(srcs_fast   ${src_fast}/low_rank.hpp
                 # ${src_fast}/fgt_wrapper.hpp)
                 
@@ -60,6 +65,7 @@ set(srcfiles_io				${Sources}\\io)
 set(srcfiles_transform		${Sources}\\transform)
 set(srcfiles_transform_cpd	${Sources}\\transform\\cpd)
 set(srcfiles_3rdparty_tinyobj	${Sources}\\3rdparty\\tinyobj)
+set(srcfiles_3rdparty_figtree	${Sources}\\3rdparty\\figtree)
 # set(srcfiles_fast		${Sources}\\fast)
 # set(srcfiles_disp		${Sources}\\disp)
 # set(srcfiles_test		${Sources})
@@ -68,19 +74,20 @@ source_group(${srcfiles_io} FILES ${regmm_io_files})
 source_group(${srcfiles_transform} FILES ${regmm_transform_files})
 source_group(${srcfiles_transform_cpd} FILES ${regmm_transform_cpd_files})
 source_group(${srcfiles_3rdparty_tinyobj} FILES ${regmm_3rdparty_tinyobj_files})
+source_group(${srcfiles_3rdparty_figtree} FILES ${regmm_3rdparty_figtree_files})
 # source_group(${srcfiles_fast} FILES ${srcs_fast})
 # source_group(${srcfiles_disp} FILES ${srcs_disp})
 # source_group(${srcfiles_test} FILES ${srcs_test})
 
 
-# set(LINK_LIBRARY ${LINK_LIBRARY} ${OPENSCENEGRAPH_LIBRARIES} ${FIGTREE_LIBRARY})
+set(LINK_LIBRARY ${LINK_LIBRARY} ${FIGTREE_LIBRARY})
 set(srcs		${regmm_io_files} ${regmm_transform_files} ${regmm_transform_cpd_files} ${regmm_3rdparty_tinyobj_files})
 
 # #set(incs        ${srcs_base} ${srcs_core})
 
 # #include_directories(${incs})
 add_executable(regmm ${srcs})
-# target_link_libraries(CPD ${LINK_LIBRARY})
+target_link_libraries(regmm ${LINK_LIBRARY})
 
 # set(CMAKE_INSTALL_PREFIX 	${PROJECT_SOURCE_DIR})
 
