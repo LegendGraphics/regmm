@@ -106,7 +106,6 @@ namespace regmm
     void saveMeshObject(const std::string& filename, MeshObject& mo)
     {
         std::vector<tinyobj::shape_t> out_shape(1);
-        std::vector<tinyobj::material_t> out_material;
 
         tinyobj::mesh_t& mesh = out_shape[0].mesh;
 
@@ -135,7 +134,7 @@ namespace regmm
             mesh.indices.push_back(fs[f][2]);
         }
 
-        bool ret = WriteObj(filename, out_shape, out_material, false);
+        bool ret = WriteObj(filename, out_shape, false);
         assert(ret);
     }
 }

@@ -60,7 +60,7 @@ namespace regmm
             mesh.positions.push_back(ps[v].z());
         }
 
-        bool ret = WriteObj(filename, out_shape, out_material, false);
+        bool ret = WriteObj(filename, out_shape, false);
         assert(ret);
     }
 }
