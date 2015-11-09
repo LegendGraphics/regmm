@@ -86,25 +86,23 @@ namespace regmm
     {
         ARAPSolver<Scalar, Dim>::DeformModel& deform_model = ARAPSolver<Scalar, Dim>::deform_model_;
         TModelMatrix& origin_model = deform_model._origin_model;
-        TDataMatrix& cloud_matrix = deform_model._data_matrix;
+        TDataMatrix& data_matrix = deform_model._data_matrix;
         TCorresMatrix& corres_matrix = deform_model._data_corres;
         TCovMatrix& cov_matrix = deform_model._cov_matrix;
         int ver_num = origin_model.rows();
 
         b_.resize(ver_num, Dim);
 
-        //for (size_t i = 0; i < ver_num; ++ i)
-        //{
-        //    TVector weight_cloud;
-        //    weight_cloud.resize(Dim);
-        //    weight_cloud.setZero();
-        //    for (size_t n = 0, n_end = corres_matrix.cols(); n < n_end; ++ n)
-        //    {
-        //        weight_cloud += corres_matrix(i, n)*cloud_matrix.row(n);
-        //    }
+        for (size_t i = 0; i < ver_num; ++ i)
+        {
+            TVector weight_cloud = TVector::Zero(Dim);
+            for (size_t n = 0, n_end = corres_matrix.cols(); n < n_end; ++ n)
+            {
+                weight_cloud += corres_matrix(i, n)*data_matrix.row(n);
+            }
 
-        //    /*b_.row(i) = ARAPSolver<Scalar, Dim>::lambda_data_fitting_*2*cov_matrix.row(i).asDiagonal().inverse()*weight_cloud;*/
-        //}
+            b_.row(i) = ARAPSolver<Scalar, Dim>::lambda_data_fitting_*2*cov_matrix.row(i).asDiagonal().inverse()*weight_cloud;
+        }
     }
 
     template <typename Scalar, int Dim>

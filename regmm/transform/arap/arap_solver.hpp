@@ -189,6 +189,12 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
+    void ARAPSolver<Scalar, Dim>::setNoise(Scalar noise_p)
+    {
+        noise_p_ = noise_p;
+    }
+
+    template <typename Scalar, int Dim>
     ARAPSolver<Scalar, Dim>::ARAPSolver()
     {
 
@@ -240,7 +246,7 @@ namespace regmm
         TModelMatrix& pm = deform_model_._model_matrix;
         this->model_ = pm;
 
-        //petal.updateNormals();
+        // updateNormals();
     }
 
     template <typename Scalar, int Dim>

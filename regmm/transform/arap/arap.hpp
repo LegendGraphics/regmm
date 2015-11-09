@@ -3,7 +3,6 @@
 
 #include <Eigen/SVD>
 #include "regmm/transform/arap/constraint.hpp"
-#include "regmm/transform/arap/arap_solver.hpp"
 
 namespace regmm
 {
@@ -59,16 +58,8 @@ namespace regmm
 
         std::vector<std::vector<Eigen::Triplet<Scalar>>> weight_sums;
         // for x,y,z coordinates
-        if (Dim == 3) 
-        {
-            weight_sums.resize(3);
-            A_.resize(3);
-        }
-        else
-        {
-            weight_sums.resize(2);
-            A_.resize(2);
-        }
+        weight_sums.resize(Dim);
+        A_.resize(Dim);
 
         for (int i = 0; i < ver_num; ++i) 
         {
@@ -109,15 +100,15 @@ namespace regmm
         TRotList& R_list = deform_model._R_list;
         int ver_num = origin_model.rows();
 
-        b_.resize(ver_num, 3);
+        b_.resize(ver_num, Dim);
 
         for (size_t i = 0; i < ver_num; ++i) 
         {
-            //b_.row(i) = TVector::Zero();
+            b_.row(i) = Eigen::Matrix<Scalar, Dim, 1>::Zero();
             for (size_t j = 0, j_end = adj_list[i].size(); j < j_end; ++j)
             {
-                /*b_.row(i) += ((weight_matrix.coeffRef(i, adj_list[i][j])/2)*
-                (R_list[i]+R_list[adj_list[i][j]])*(origin_model.row(i) - origin_model.row(adj_list[i][j]))).transpose();*/
+                b_.row(i) += (weight_matrix.coeffRef(i, adj_list[i][j])/2) * 
+                    (origin_model.row(i) - origin_model.row(adj_list[i][j])) * (R_list[i]+R_list[adj_list[i][j]]).transpose();
             }
         }
     }
