@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <Eigen/Core>
+#include <Eigen/Sparse>
 
 namespace regmm
 {
@@ -173,11 +174,35 @@ namespace regmm
         typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Dim, Eigen::RowMajor> MatrixD;
 
         typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> Matrix;
+
+        typedef Eigen::SparseMatrix<Scalar> SparseMatrix;
     };
 
 #define     TVector             typename MatrixType<Scalar, Dim>::Vector
 #define     TMatrixD            typename MatrixType<Scalar, Dim>::MatrixD
 #define     TMatrix             typename MatrixType<Scalar, Dim>::Matrix
+#define     TSparseMatrix       typename MatrixType<Scalar, Dim>::SparseMatrix
+
+
+    template <typename Scalar, int Dim>
+    struct ARAPType
+    {
+        typedef std::vector<Scalar> WeightList;
+        typedef std::vector<std::vector<int>> AdjList;
+        typedef std::vector<Eigen::Vector3i> FaceList;
+        typedef Eigen::SparseMatrix<double> WeightMatrix;
+        typedef std::vector<Eigen::Matrix<Scalar, Dim, Dim>> RotList;
+    };
+
+#define     TCorresMatrix    TMatrix
+#define     TDataMatrix      TMatrixD
+#define     TModelMatrix     TMatrixD
+#define     TCovMatrix       TMatrixD
+#define     TWeightMatrix    TSparseMatrix
+#define     TWeightList      typename ARAPType<Scalar, Dim>::WeightList
+#define     TAdjList         typename ARAPType<Scalar, Dim>::AdjList
+#define     TFaceList        typename ARAPType<Scalar, Dim>::FaceList
+#define     TRotList         typename ARAPType<Scalar, Dim>::RotList
 }
 
 #endif

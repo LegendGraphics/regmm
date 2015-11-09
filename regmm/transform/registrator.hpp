@@ -1,6 +1,10 @@
 #ifndef _REGISTRATOR_HPP_
 #define _REGISTRATOR_HPP_
 
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+
 
 #include "regmm/io/points.hpp"
 #include "regmm/io/mesh.hpp"

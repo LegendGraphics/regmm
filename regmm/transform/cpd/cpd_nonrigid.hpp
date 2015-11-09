@@ -52,7 +52,7 @@ namespace regmm
 
         inline TMatrix& getG(){ return G_; }
 
-        void run();
+        void compute();
 
     private:
         void initialization();
@@ -100,7 +100,7 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
-    void CPDNRigid<Scalar, Dim>::run()
+    void CPDNRigid<Scalar, Dim>::compute()
     {
         size_t iter_num = 0;
         Scalar e_tol = 10 + this->e_tol_;
@@ -137,6 +137,7 @@ namespace regmm
         correspondences();
         this->updateModel();
         this->denormalize();
+        this->rewriteOriginalSource();
         /*RenderThread<Scalar, Dim>::instance()->cancel();*/
     }
 

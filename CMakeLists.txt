@@ -44,6 +44,11 @@ set(regmm_transform_cpd_files	${regmm_transform_cpd}/cpd_base.hpp
 				# ${src_core}/cpd_affine.hpp
 				# ${src_core}/cpd_nonrigid.hpp)
 				
+set(regmm_transform_arap_files	${regmm_transform_arap}/constraint.hpp
+								${regmm_transform_arap}/arap.hpp
+								${regmm_transform_arap}/data_fitting.hpp
+								${regmm_transform_arap}/arap_solver.hpp)
+				
 set(regmm_3rdparty_tinyobj_files	${regmm_3rdparty_tinyobj}/tiny_obj_loader.h
 									${regmm_3rdparty_tinyobj}/tiny_obj_loader.cc
 									${regmm_3rdparty_tinyobj}/obj_writer.h
@@ -64,6 +69,7 @@ set(Sources		"Source Files")
 set(srcfiles_io				${Sources}\\io)
 set(srcfiles_transform		${Sources}\\transform)
 set(srcfiles_transform_cpd	${Sources}\\transform\\cpd)
+set(srcfiles_transform_arap	${Sources}\\transform\\arap)
 set(srcfiles_3rdparty_tinyobj	${Sources}\\3rdparty\\tinyobj)
 set(srcfiles_3rdparty_figtree	${Sources}\\3rdparty\\figtree)
 # set(srcfiles_fast		${Sources}\\fast)
@@ -73,6 +79,7 @@ set(srcfiles_3rdparty_figtree	${Sources}\\3rdparty\\figtree)
 source_group(${srcfiles_io} FILES ${regmm_io_files})
 source_group(${srcfiles_transform} FILES ${regmm_transform_files})
 source_group(${srcfiles_transform_cpd} FILES ${regmm_transform_cpd_files})
+source_group(${srcfiles_transform_arap} FILES ${regmm_transform_arap_files})
 source_group(${srcfiles_3rdparty_tinyobj} FILES ${regmm_3rdparty_tinyobj_files})
 source_group(${srcfiles_3rdparty_figtree} FILES ${regmm_3rdparty_figtree_files})
 # source_group(${srcfiles_fast} FILES ${srcs_fast})
@@ -81,7 +88,7 @@ source_group(${srcfiles_3rdparty_figtree} FILES ${regmm_3rdparty_figtree_files})
 
 
 set(LINK_LIBRARY ${LINK_LIBRARY} ${FIGTREE_LIBRARY})
-set(srcs		${regmm_io_files} ${regmm_transform_files} ${regmm_transform_cpd_files} ${regmm_3rdparty_tinyobj_files})
+set(srcs		${regmm_io_files} ${regmm_transform_files} ${regmm_transform_cpd_files} ${regmm_transform_arap_files} ${regmm_3rdparty_tinyobj_files})
 
 # #set(incs        ${srcs_base} ${srcs_core})
 
