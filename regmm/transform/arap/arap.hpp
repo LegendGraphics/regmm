@@ -120,7 +120,7 @@ namespace regmm
         TModelMatrix& origin_model = deform_model._origin_model;
         TRotList R_list;
 
-        for (size_t j = 0, j_end = origin_model.cols(); j < j_end; ++ j)
+        for (size_t j = 0, j_end = origin_model.rows(); j < j_end; ++ j)
         {
             R_list.push_back(Eigen::Matrix<Scalar, Dim, Dim>::Identity());
         }

@@ -95,7 +95,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     CPDBase<Scalar, Dim>::CPDBase()
         : iter_num_(50), v_tol_(1e-3), e_tol_(1e-3), w_(0),
-        fgt_(false), fgt_eps_(1e-3), lr_(false), K_(0), lr_maxitr_(40)
+        fgt_(false), fgt_eps_(1e-3), lr_(false), K_(10), lr_maxitr_(40)
     {}
 
     template <typename Scalar, int Dim>

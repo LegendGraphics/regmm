@@ -24,6 +24,7 @@ namespace regmm
         MESH
     };
 
+
     template <typename Scalar, int Dim>
     class Registrator
     {

@@ -2,6 +2,7 @@
 #define _POINTS_HPP_
 
 #include <vector>
+#include <fstream>
 #include <string>
 
 #include "regmm/io/basic_types.hpp"
@@ -19,7 +20,7 @@ namespace regmm
 #define     PointsArray     typename PtsType<Scalar, Dim>::Points
 #define     PointSet        PointsArray
 
-#define     PointSetInstance(S, D)  regmm::PtsType<S, D>::Points
+#define     PointSetInstance(S, Dim)  regmm::PtsType<S, Dim>::Points
 }
 
 namespace regmm
@@ -27,41 +28,55 @@ namespace regmm
     template <typename Scalar, int Dim>
     void loadPointSet(const std::string& filename, PointSet& ps)
     {
-        std::vector<tinyobj::shape_t> shapes;
-        std::vector<tinyobj::material_t> materials;
+        std::fstream fin(filename.c_str(), std::ios_base::in);
 
-        std::string err = tinyobj::LoadObj(shapes, materials, filename.c_str());
-
-        if (!err.empty()) {
-            std::cerr << err << std::endl;
+        if (!fin)
+        {
+            std::cout << "cannot open the file!" << std::endl;
             exit(1);
         }
 
-        assert(shapes.size() == 1 ? true : ("obj should be only one shape" && false));
+        std::vector<Scalar> m_values;
+        Scalar tmp = 0;
+        size_t i = 0, j = 0;
+        while (fin >> tmp)
+        {
+            m_values.push_back(tmp);
+        }
 
-        tinyobj::mesh_t& mesh = shapes[0].mesh;
-        assert((mesh.positions.size() % 3) == 0);
+        size_t points_size = m_values.size() / Dim;
 
-        for (size_t v = 0; v < mesh.positions.size() / 3; v++) 
-            ps.push_back(PointType(mesh.positions[3*v+0], mesh.positions[3*v+1], mesh.positions[3*v+2]));
+        if (points_size * Dim != m_values.size())
+        {
+            std::cout << "File is broken!" << std::endl;
+            exit(1);
+        }
+
+        for (size_t i = 0; i < points_size; ++ i)
+        {
+            if (Dim == 3)
+                ps.push_back(PointType(m_values[3*i], m_values[3*i+1], m_values[3*i+2]));
+            else 
+                ps.push_back(PointType(m_values[2*i], m_values[2*i+1]));
+        }
+
+        fin.close();
     }
 
     template <typename Scalar, int Dim>
     void savePointSet(const std::string& filename, PointSet& ps)
     {
-        std::vector<tinyobj::shape_t> out_shape(1);
-        std::vector<tinyobj::material_t> out_material;
+        std::fstream fout(filename.c_str(), std::ios_base::out);
 
-        tinyobj::mesh_t& mesh = out_shape[0].mesh;
-        for (size_t v = 0; v < ps.size(); ++ v)
+        for (size_t i = 0; i < ps.size(); ++ i)
         {
-            mesh.positions.push_back(ps[v].x());
-            mesh.positions.push_back(ps[v].y());
-            mesh.positions.push_back(ps[v].z());
+            if (Dim == 3)
+                fout << ps[i].x() << " " << ps[i].y() << " " << ps[i].z() << "\n";
+            else
+                fout << ps[i].x() << " " << ps[i].y() << "/n";
         }
 
-        bool ret = WriteObj(filename, out_shape, false);
-        assert(ret);
+        fout.close();
     }
 }
 

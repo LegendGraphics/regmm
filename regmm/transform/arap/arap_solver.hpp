@@ -118,7 +118,6 @@ namespace regmm
         void init();
         void initFittingParas();
         void initMeshParas();
-        void initTerms();
         Scalar zero_correction(Scalar value);
 
     private:
@@ -153,7 +152,7 @@ namespace regmm
     Scalar ARAPSolver<Scalar, Dim>::eps_ = 1e-3;
    
     template <typename Scalar, int Dim>
-    Scalar ARAPSolver<Scalar, Dim>::lambda_data_fitting_ = 0.01;
+    Scalar ARAPSolver<Scalar, Dim>::lambda_data_fitting_ = 1e-2;
  
     template <typename Scalar, int Dim>
     Scalar ARAPSolver<Scalar, Dim>::lambda_arap_ = 1;
@@ -245,8 +244,10 @@ namespace regmm
     {
         TModelMatrix& pm = deform_model_._model_matrix;
         this->model_ = pm;
-
+        
         // updateNormals();
+
+        rewriteOriginalSource();
     }
 
     template <typename Scalar, int Dim>
@@ -323,12 +324,8 @@ namespace regmm
         A_.resize(Dim);
 
         initMeshParas();
-        std::cout << "finish mesh initialization" << std::endl;
 
         initFittingParas();
-        std::cout << "finish data fitting initialization" << std::endl;
-
-        initTerms();
 
         std::cout << "finish solver initialization" << std::endl;
     }
@@ -471,11 +468,6 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
-    void ARAPSolver<Scalar, Dim>::initTerms()
-    {
-    }
-
-    template <typename Scalar, int Dim>
     Scalar ARAPSolver<Scalar, Dim>::zero_correction(Scalar value)
     {
         Scalar min_double = std::numeric_limits<Scalar>::min();
@@ -547,7 +539,7 @@ namespace regmm
             for (size_t n = 0, n_end = data_corres.cols(); n < n_end; ++ n)
             {
                 TVector cm = data_matrix.row(n) - model_matrix.row(k);
-                e1 += data_corres(k, n) * cm.transpose() * cov_matrix.col(k).asDiagonal().inverse() * cm;
+                e1 += data_corres(k, n) * cm.transpose() * cov_matrix.row(k).asDiagonal().inverse() * cm;
             }
 
             for (size_t j = 0, j_end = adj_list[k].size(); j < j_end; ++ j)

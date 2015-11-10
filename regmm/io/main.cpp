@@ -1,8 +1,6 @@
 #include <iostream>
 #include "regmm/io/mesh.hpp"
-//#include "regmm/transform/cpd/cpd_rigid.hpp"
-//#include "regmm/transform/cpd/cpd_nonrigid.hpp"
-#include "regmm/transform/arap/arap_solver.hpp"
+#include "regmm/transform/regmm_engine.hpp"
 
 
 #define SCALAR float
@@ -10,28 +8,40 @@
 
 int main()
 {
-    //PointSetInstance(SCALAR, DIM)* source = new PointSetInstance(SCALAR, DIM);
-    //PointSetInstance(SCALAR, DIM)* target = new PointSetInstance(SCALAR, DIM);
+    PointSetInstance(SCALAR, DIM)* source = new PointSetInstance(SCALAR, DIM);
+    PointSetInstance(SCALAR, DIM)* target = new PointSetInstance(SCALAR, DIM);
 
-    //std::string file = "d:/petal.obj";
-    //std::string newfile = "d:/npetal.obj";
-    //regmm::loadPointSet<SCALAR, DIM>(file, *source);
-    //regmm::loadPointSet<SCALAR, DIM>(file, *target);
-    //
-    ///*regmm::Registrator<SCALAR, DIM>* registrator = new regmm::CPDRigid<SCALAR, DIM>();*/
-    //regmm::Registrator<SCALAR, DIM>* registrator = new regmm::CPDNRigid<SCALAR, DIM>();
-    //registrator->setDataType(regmm::POINT_CLOUD);
-    //registrator->setRegType(regmm::RIGID);
-    //registrator->setSource(*source);
-    //registrator->setTarget(*target);
-    //registrator->compute();
+    std::string file = "d:/petal.obj";
+    std::string newfile = "d:/npetal.obj";
+    regmm::loadPointSet<SCALAR, DIM>(file, *source);
+    regmm::loadPointSet<SCALAR, DIM>(file, *target);
 
-    //regmm::savePointSet<SCALAR, DIM>(newfile, *source);
+    regmm::RegmmEngine<SCALAR, DIM>* regmm_engine = new regmm::RegmmEngine<SCALAR, DIM>();
+    regmm_engine->initEngine(regmm::NONRIGID, regmm::POINT_CLOUD);
+    regmm_engine->setSource(*source);
+    regmm_engine->setTarget(*target);
+    regmm_engine->compute();
 
-    MeshObjectInstance(SCALAR, DIM)* source = new MeshObjectInstance(SCALAR, DIM);
+    regmm::savePointSet<SCALAR, DIM>(newfile, *source);
+
+
+    
+    /*MeshObjectInstance(SCALAR, DIM)* source = new MeshObjectInstance(SCALAR, DIM);
     MeshObjectInstance(SCALAR, DIM)* target = new MeshObjectInstance(SCALAR, DIM);
 
-    regmm::Registrator<SCALAR, DIM>* registrator = new regmm::ARAPSolver<SCALAR, DIM>();
+    std::string file = "d:/petal.obj";
+    std::string newfile = "d:/npetal.obj";
+    regmm::loadMeshObject<SCALAR, DIM>(file, *source);
+    regmm::loadMeshObject<SCALAR, DIM>(file, *target);
+
+    regmm::RegmmEngine<SCALAR, DIM>* regmm_engine = new regmm::RegmmEngine<SCALAR, DIM>();
+    regmm_engine->initEngine(regmm::NONRIGID, regmm::POINT_CLOUD);
+
+    regmm_engine->setSource(*source);
+    regmm_engine->setTarget(*target);
+    regmm_engine->compute();
+
+    regmm::saveMeshObject<SCALAR, DIM>(newfile, *source);*/
 
     int a;
     std::cin >> a;
