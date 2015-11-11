@@ -129,6 +129,12 @@ namespace regmm
     }
 
     template <typename Scalar, int Dim>
+    void RegmmEngine<Scalar, Dim>::setNonrigidMeshSolver(bool is_cpd)
+    {
+        is_cpd_ = is_cpd;
+    }
+
+    template <typename Scalar, int Dim>
     void RegmmEngine<Scalar, Dim>::setSource(PointSet& source)
     {
         if (reg_type_ == NONRIGID && src_type_ == MESH && !is_cpd_)
