@@ -10,15 +10,15 @@ int main()
 {
     // source and target instance
     // target could be either points or mesh, since we only deform source towards target
-    MeshObject(SCALAR, DIM)* source = new MeshObject(SCALAR, DIM);
-    MeshObject(SCALAR, DIM)* target = new MeshObject(SCALAR, DIM);
+    MeshObjectInstance(SCALAR, DIM)* source = new MeshObjectInstance(SCALAR, DIM);
+    MeshObjectInstance(SCALAR, DIM)* target = new MeshObjectInstance(SCALAR, DIM);
 
     // source and target files, points supports xyz format and mesh supports obj format
-    std::string source_file = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_source.xyz";
-    std::string target_file = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_target.xyz";
+    std::string source_file = "D:/regmm/data/rigid/shuttle_source.obj";
+    std::string target_file = "D:/regmm/data/rigid/shuttle_target.obj";
 
-    // deformed source file
-    std::string deformed_source = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_deformed.xyz";
+    // new source file
+    std::string new_source = "D:/regmm/data/rigid/shuttle_source_new.obj";
 
     // load source and target
     regmm::loadMeshObject<SCALAR, DIM>(source_file, *source);
@@ -48,12 +48,12 @@ int main()
     regmm_engine->setLRMaxIteration(50);            // low rank iterative number, default = 40;
     */
 
-    // compute deformation
+    // compute transformation
     regmm_engine->compute();
 
 
-    // save deformed source
-    regmm::saveMeshObject<SCALAR, DIM>(deformed_source, *source);
+    // save new source
+    regmm::saveMeshObject<SCALAR, DIM>(new_source, *source);
 
     return 0;
 }

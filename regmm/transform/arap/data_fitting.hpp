@@ -58,7 +58,7 @@ namespace regmm
 
         for (int i = 0; i < ver_num; ++i) 
         {
-            double wi_x = 0, wi_y = 0, wi_z = 0;
+            Scalar wi_x = 0, wi_y = 0, wi_z = 0;
 
             wi_x += zero_correction(ARAPSolver<Scalar, Dim>::lambda_data_fitting_*(2/cov_matrix.row(i)[0])*corres_matrix.row(i).sum());
             wi_y += zero_correction(ARAPSolver<Scalar, Dim>::lambda_data_fitting_*(2/cov_matrix.row(i)[1])*corres_matrix.row(i).sum());

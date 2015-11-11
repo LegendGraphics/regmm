@@ -190,7 +190,7 @@ namespace regmm
         typedef std::vector<Scalar> WeightList;
         typedef std::vector<std::vector<int>> AdjList;
         typedef std::vector<Eigen::Vector3i> FaceList;
-        typedef Eigen::SparseMatrix<double> WeightMatrix;
+        typedef Eigen::SparseMatrix<Scalar> WeightMatrix;
         typedef std::vector<Eigen::Matrix<Scalar, Dim, Dim>> RotList;
     };
 

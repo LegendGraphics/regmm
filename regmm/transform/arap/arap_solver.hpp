@@ -152,7 +152,7 @@ namespace regmm
     Scalar ARAPSolver<Scalar, Dim>::eps_ = 1e-3;
    
     template <typename Scalar, int Dim>
-    Scalar ARAPSolver<Scalar, Dim>::lambda_data_fitting_ = 1e-2;
+    Scalar ARAPSolver<Scalar, Dim>::lambda_data_fitting_ = 1;
  
     template <typename Scalar, int Dim>
     Scalar ARAPSolver<Scalar, Dim>::lambda_arap_ = 1;
@@ -217,9 +217,9 @@ namespace regmm
     void ARAPSolver<Scalar, Dim>::deform()
     {
         int iter_num = 0;
-        double eps = 1;
+        Scalar eps = 1;
 
-        double e = 0;
+        Scalar e = 0;
 
         std::cout << "Start EM Iteration..." << std::endl;
 
@@ -227,7 +227,7 @@ namespace regmm
         {
             e_step();
 
-            double e_n = m_step();
+            Scalar e_n = m_step();
 
             eps = std::fabs((e_n - e) / e_n);
             e = e_n;

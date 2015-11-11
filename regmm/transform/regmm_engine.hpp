@@ -24,6 +24,9 @@ namespace regmm
         void setTarget(MeshObject& target);
 
     public:
+        void setNonrigidMeshSolver(bool is_cpd);
+
+    public:
         void setIterativeNumber(int iter_num);
 
     public:
@@ -52,6 +55,9 @@ namespace regmm
     private:
         CPDBase<Scalar, Dim>*      cpdbase_part_;
         ARAPSolver<Scalar, Dim>*    arapsolver_part_;
+
+    private:
+        bool     is_cpd_;
     };
 }
 
@@ -60,7 +66,8 @@ namespace regmm
     template <typename Scalar, int Dim>
     RegmmEngine<Scalar, Dim>::RegmmEngine()
         :cpdbase_part_(nullptr),
-        arapsolver_part_(nullptr)
+        arapsolver_part_(nullptr),
+        is_cpd_(true)
     {
 
     }
@@ -104,16 +111,27 @@ namespace regmm
 
         else
         {
-            arapsolver_part_ = new ARAPSolver<Scalar, Dim>;
-            arapsolver_part_->setRegType(reg_type_);
-            arapsolver_part_->setDataType(src_type_);
+            if (is_cpd_)
+            {
+                cpdbase_part_ = new CPDNRigid<Scalar, Dim>;
+                cpdbase_part_->setRegType(reg_type_);
+                cpdbase_part_->setDataType(src_type_);
+            }
+            
+            else 
+            {
+                arapsolver_part_ = new ARAPSolver<Scalar, Dim>;
+                arapsolver_part_->setRegType(reg_type_);
+                arapsolver_part_->setDataType(src_type_);
+            }
+            
         }
     }
 
     template <typename Scalar, int Dim>
     void RegmmEngine<Scalar, Dim>::setSource(PointSet& source)
     {
-        if (reg_type_ == NONRIGID && src_type_ == MESH)
+        if (reg_type_ == NONRIGID && src_type_ == MESH && !is_cpd_)
             arapsolver_part_->setSource(source);
         else 
             cpdbase_part_->setSource(source);
@@ -122,7 +140,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     void RegmmEngine<Scalar, Dim>::setSource(MeshObject& source)
     {
-        if (reg_type_ == NONRIGID && src_type_ == MESH)
+        if (reg_type_ == NONRIGID && src_type_ == MESH && !is_cpd_)
             arapsolver_part_->setSource(source);
         else 
             cpdbase_part_->setSource(source);
@@ -131,7 +149,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     void RegmmEngine<Scalar, Dim>::setTarget(PointSet& target)
     {
-        if (reg_type_ == NONRIGID && src_type_ == MESH)
+        if (reg_type_ == NONRIGID && src_type_ == MESH && !is_cpd_)
             arapsolver_part_->setTarget(target);
         else 
             cpdbase_part_->setTarget(target);
@@ -140,7 +158,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     void RegmmEngine<Scalar, Dim>::setTarget(MeshObject& target)
     {
-        if (reg_type_ == NONRIGID && src_type_ == MESH)
+        if (reg_type_ == NONRIGID && src_type_ == MESH && !is_cpd_)
             arapsolver_part_->setTarget(target);
         else 
             cpdbase_part_->setTarget(target);
@@ -149,7 +167,7 @@ namespace regmm
     template <typename Scalar, int Dim>
     void RegmmEngine<Scalar, Dim>::setIterativeNumber(int iter_num)
     {
-        if (reg_type_ == NONRIGID && src_type_ == MESH)
+        if (reg_type_ == NONRIGID && src_type_ == MESH && !is_cpd_)
             arapsolver_part_->setIterativeNumber(iter_num);
         else 
             cpdbase_part_->setIterativeNumber(iter_num);

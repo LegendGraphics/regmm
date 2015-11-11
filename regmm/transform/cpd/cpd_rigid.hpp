@@ -79,7 +79,7 @@ namespace regmm
         Scalar e_tol = 10 + this->e_tol_;
         Scalar e = 0;
         
-        this->normalize();
+        //this->normalize();
         initialization();
 
         /*if (this->_vision)
@@ -108,7 +108,7 @@ namespace regmm
         
         correspondences();
         this->updateModel();
-        this->denormalize();
+        //this->denormalize();
         this->rewriteOriginalSource();
         /*RenderThread<Scalar, Dim>::instance()->cancel();*/
     }

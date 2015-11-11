@@ -63,7 +63,7 @@ namespace regmm
 
         for (int i = 0; i < ver_num; ++i) 
         {
-            double wi_x = 0, wi_y = 0, wi_z = 0;
+            Scalar wi_x = 0, wi_y = 0, wi_z = 0;
 
             for (size_t j = 0, j_end = deform_model._adj_list[i].size(); j < j_end; ++j)
             {
@@ -160,6 +160,7 @@ namespace regmm
             Si = Pi.transpose() * Di * Pi_Prime;
             TMatrix Ui;
             TMatrix Vi;
+
             Eigen::JacobiSVD<TMatrix> svd(Si, Eigen::ComputeThinU | Eigen::ComputeThinV);
             Ui = svd.matrixU();
             Vi = svd.matrixV();

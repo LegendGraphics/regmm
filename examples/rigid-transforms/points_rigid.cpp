@@ -4,7 +4,7 @@
 #include "regmm/transform/regmm_engine.hpp"
 
 #define SCALAR float    // floating-point precision
-#define DIM 3           // data dimension: 2 or 3
+#define DIM 2           // data dimension: 2 or 3
 
 int main()
 {
@@ -14,11 +14,11 @@ int main()
     PointSetInstance(SCALAR, DIM)* target = new PointSetInstance(SCALAR, DIM);
 
     // source and target files, points supports xyz format and mesh supports obj format
-    std::string source_file = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_source.xyz";
-    std::string target_file = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_target.xyz";
+    std::string source_file = "D:/regmm/data/rigid/fish_source_2d.xy";
+    std::string target_file = "D:/regmm/data/rigid/fish_target_2d.xy";
 
-    // deformed source file
-    std::string deformed_source = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_deformed.xyz";
+    // new source file
+    std::string new_source = "D:/regmm/data/rigid/fish_source_new.xy";
 
     // load source and target
     regmm::loadPointSet<SCALAR, DIM>(source_file, *source);
@@ -48,12 +48,12 @@ int main()
     regmm_engine->setLRMaxIteration(50);            // low rank iterative number, default = 40;
     */
 
-    // compute deformation
+    // compute transformation
     regmm_engine->compute();
 
 
-    // save deformed source
-    regmm::savePointSet<SCALAR, DIM>(deformed_source, *source);
+    // save new source
+    regmm::savePointSet<SCALAR, DIM>(new_source, *source);
 
     return 0;
 }

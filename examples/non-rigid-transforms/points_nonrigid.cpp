@@ -14,11 +14,11 @@ int main()
     PointSetInstance(SCALAR, DIM)* target = new PointSetInstance(SCALAR, DIM);
 
     // source and target files, points supports xyz format and mesh supports obj format
-    std::string source_file = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_source.xyz";
-    std::string target_file = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_target.xyz";
+    std::string source_file = "D:/regmm/data/nonrigid/face_source.xyz";
+    std::string target_file = "D:/regmm/data/nonrigid/face_target.xyz";
 
-    // deformed source file
-    std::string deformed_source = "D:/baidu disk/WorkSpace/regmm/data/nonrigid/face_deformed.xyz";
+    // new source file
+    std::string new_source = "D:/regmm/data/nonrigid/face_source_new.xyz";
 
     // load source and target
     regmm::loadPointSet<SCALAR, DIM>(source_file, *source);
@@ -48,12 +48,12 @@ int main()
     regmm_engine->setLRMaxIteration(50);            // low rank iterative number, default = 40;
     */
 
-    // compute deformation
+    // compute transformation
     regmm_engine->compute();
 
 
-    // save deformed source
-    regmm::savePointSet<SCALAR, DIM>(deformed_source, *source);
+    // save new source
+    regmm::savePointSet<SCALAR, DIM>(new_source, *source);
 
     return 0;
 }

@@ -33,7 +33,7 @@ namespace regmm
         if (!fin)
         {
             std::cout << "cannot open the file!" << std::endl;
-            exit(1);
+            return;
         }
 
         std::vector<Scalar> m_values;
@@ -48,8 +48,8 @@ namespace regmm
 
         if (points_size * Dim != m_values.size())
         {
-            std::cout << "File is broken!" << std::endl;
-            exit(1);
+            std::cout << "File is broken! Or Dimension is incorrect!" << std::endl;
+            return;
         }
 
         for (size_t i = 0; i < points_size; ++ i)
@@ -73,7 +73,7 @@ namespace regmm
             if (Dim == 3)
                 fout << ps[i].x() << " " << ps[i].y() << " " << ps[i].z() << "\n";
             else
-                fout << ps[i].x() << " " << ps[i].y() << "/n";
+                fout << ps[i].x() << " " << ps[i].y() << "\n";
         }
 
         fout.close();
