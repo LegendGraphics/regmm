@@ -4,6 +4,8 @@
 #include <string>
 
 #include "regmm/io/basic_types.hpp"
+#include "regmm/3rdparty/tinyobj/tiny_obj_loader.h"
+#include "regmm/3rdparty/tinyobj/obj_writer.h"
 
 namespace regmm
 {

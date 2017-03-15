@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-set( EIGEN3_INCLUDE_DIR "$ENV{EIGEN3_INCLUDE_DIR}" )
+set( EIGEN3_INCLUDE_DIR $ENV{EIGEN3_INCLUDE_DIR} )
 
 find_package(3rdParty)
 include_directories(${FIGTREE_INCLUDE_DIR})   
